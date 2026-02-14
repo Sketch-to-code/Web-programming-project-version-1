@@ -1,0 +1,254 @@
+/* 1. VARIABLES - This is the "Brain" of your design */
+:root {
+    /* Light Mode Colors */
+    --bg-color: #f0f4f8;
+    --card-bg: #ffffff;
+    --text-color: #263238;
+    --nav-bg: #ffffff;
+    --primary: #00897b;
+    --primary-dark: #004d40;
+    --secondary: #e0f2f1;
+    --accent: #ff5252;
+    --shadow: 0 10px 30px rgba(0,0,0,0.08);
+    --gradient: linear-gradient(135deg, #00897b 0%, #004d40 100%);
+    --glass: rgba(255, 255, 255, 0.9);
+}
+
+/* 2. DARK THEME - These overwrite the variables when the class is active */
+.dark-theme {
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --text-color: #e0e0e0;
+    --nav-bg: #1a1a1a;
+    --glass: rgba(30, 30, 30, 0.9);
+    --secondary: #263238;
+}
+
+/* 3. RESET & BASE STYLES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* 4. NAVIGATION */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background: var(--nav-bg);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo { font-size: 1.5rem; font-weight: bold; }
+.highlight { color: var(--primary); }
+
+.nav-links { list-style: none; display: flex; gap: 20px; }
+.nav-links a { text-decoration: none; color: var(--text-color); font-weight: 500; }
+
+.emergency-btn { 
+    background: #e53935; 
+    color: white; 
+    padding: 8px 18px; 
+    border-radius: 25px; 
+    font-weight: bold; 
+}
+
+.theme-toggle { cursor: pointer; font-size: 1.2rem; color: var(--primary); }
+
+/* 5. HERO SECTION (The Big Blue Header) */
+.hero {
+    background: var(--gradient);
+    color: white;
+    padding: 100px 10% 140px; /* Extra bottom padding for the overlap */
+    text-align: center;
+    clip-path: ellipse(150% 100% at 50% 0%);
+}
+
+/* 6. SEARCH CONTAINER (The Floating Box) */
+.search-box {
+    background: var(--glass);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    margin: 30px auto 40px; /* Pulls it UP into the hero section */
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    max-width: 800px;
+    backdrop-filter: blur(10px); /* Modern blur effect */
+}
+
+input { 
+    padding: 15px; 
+    flex-grow: 1; 
+    border: 1px solid #ddd; 
+    border-radius: 10px; 
+    background: var(--card-bg);
+    color: var(--text-color);
+}
+
+button { 
+    padding: 12px 25px; 
+    background: var(--primary); 
+    color: white; 
+    border: none; 
+    border-radius: 10px; 
+    cursor: pointer; 
+    transition: 0.3s;
+    font-weight: 600;
+}
+
+button:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+/* 7. CARDS & RESULTS */
+.container { padding: 2rem 10%; }
+
+.result-card {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    border-top: 8px solid var(--primary);
+    margin-top: 20px;
+    transition: transform 0.3s;
+}
+
+/* 8. TAGS (The Notepad List) */
+.med-tag {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--primary);
+    padding: 8px 15px;
+    border-radius: 20px;
+    margin: 5px;
+    font-weight: 600;
+    border: 1px solid var(--primary);
+}
+
+.med-tag i { margin-left: 10px; cursor: pointer; color: var(--accent); }
+
+/* 9. CHATBOT & MAP */
+.chat-box { 
+    height: 350px; 
+    overflow-y: auto; 
+    border-radius: 15px; 
+    padding: 20px; 
+    background: var(--card-bg); 
+    border: 1px solid #ddd;
+}
+
+#map { 
+    height: 450px; 
+    width: 100%; 
+    border-radius: 20px; 
+    box-shadow: var(--shadow); 
+}
+
+.leaflet-popup-content-wrapper {
+    border-radius: 12px;
+    padding: 5px;
+}
+.leaflet-popup-content b {
+    font-size: 14px;
+}
+
+
+/* Article Grid Styling */
+.article-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.article-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: 0.3s;
+}
+
+.article-card:hover { transform: translateY(-10px); }
+
+.article-img {
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+}
+
+.article-content { padding: 20px; }
+.article-content h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--primary); }
+.article-content p { font-size: 0.9rem; color: #666; margin-bottom: 15px; }
+
+.read-more {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+
+
+
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 40px;
+    background: var(--card-bg);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+
+.contact-info h2 {
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.info-item i {
+    color: var(--primary);
+    font-size: 1.2rem;
+}
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-form input, .contact-form textarea {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+.contact-form button {
+    align-self: flex-start;
+}
+
+.hidden { display: none; }
+
+

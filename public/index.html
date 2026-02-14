@@ -1,0 +1,149 @@
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharma Quest | Your Health Partner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+</head>
+<body>
+    <nav>
+        <div class="logo">Pharma<span class="highlight">Quest</span> <i class="fa-solid fa-heart-pulse"></i></div>
+        <ul class ="nav-links">
+            <li><a href="#search-section">Find Meds</a></li>
+            <li><a href="#ai-doc">AI Doctor</a></li>
+            <li><a href="#nearby">Locate Pharmacy</a></li>
+            <li><a href="#articles">Health Tips</a></li>
+        </ul>
+        <div class="emergency-btn">Emergency: 108</div>
+        
+        <div class="theme-toggle" onclick="toggleDarkMode()">
+            <i id="themeIcon" class="fas fa-moon"></i>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Your Health, Our Quest</h1>
+        <p>Instant medicine info, AI health suggestions, and pharmacies near you</p>
+    </header>
+
+    <section id="search-section" class="container">
+        <h2><i class="fas fa-search"></i> 
+            Medicine Encyclopedia</h2>
+        <div class="search-box">
+            <input type="text" id="medInput" placeholder="Enter medicine name">
+            <button onclick="searchMedicine()">Search</button>
+        </div>
+        <div id="medResult" class="result-card hidden">
+            <button id="downloadPdf" class="hidden" onclick="generatePDF()">
+                <i class="fas fa-file-pdf"></i> Download Info
+            </button>
+        </div>
+
+        <div class="notepad-section">
+            <h3><i class="fas fa-notes-medical"></i> My Med List</h3>
+            <ul id="savedMedsList"></ul>
+            <button onclick="clearList()" class="secondary-btn">Clear List</button>
+
+        </div>
+    </section>
+
+    <section id ="ai-doc" class="container bg-light">
+        <h2><i class="fas fa-user-md"></i> AI Symptom Checker</h2>
+        <div class="chat-interface">
+            <div id="chatBox" class="chat-box">
+                <div class = "bot-msg">Hello! Describe your symptoms, and we will suggest a remedy</div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="symptomInput" placeholder="Enter your symptom">
+                <button onclick="getAIAdvice()"><i class ="fas fa-paper-plane"></i></button>
+            </div>
+
+        </div>
+    </section>
+
+
+    <section id="nearby" class="container">
+        <h2> <i class="fas fa-map-marked-alt"></i> Pharmacies Near You</h2>
+        <p>Using your geolocation to find the best rated stores</p>
+        <div id="map"></div>
+    </section>
+
+    <section id="articles" class="container bg-light">
+        <h2><i class="fas fa-newspaper"></i> Daily Health Reads</h2>
+        <div class="article-grid">
+            <div class="article-card">
+                <div class="article-img" style="background-image: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=500');"></div>
+                <div class="article-content">
+                    <h3>Immunity Boosting in 2026</h3>
+                    <p>Discover the latest clinical findings on Vitamin D and Zinc for respiratory health.</p>
+                    <a href="https://www.timesnownews.com/health/5-desi-superfoods-you-must-stock-up-on-in-2026-for-better-health-and-strong-immunity-article-153366774 " target="_blank" class="read-more">Read Full Article →</a>
+                </div>
+            </div>
+
+            <div class="article-card">
+                <div class="article-img" style="background-image: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=500');"></div>
+                <div class="article-content">
+                    <h3>Mental Health & Pharmacy</h3>
+                    <p>How your local pharmacist can help manage anxiety and stress-related prescriptions.</p>
+                    <a href="https://www.webmd.com/balance/stress-management/default.htm" target="_blank" class="read-more">Read Full Article →</a>
+                </div>
+            </div>
+
+            <div class="article-card">
+                <div class="article-img" style="background-image: url('https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?auto=format&fit=crop&w=500');"></div>
+                <div class="article-content">
+                    <h3>Medicine Storage Tips</h3>
+                    <p>Are you storing your antibiotics correctly? Heat and humidity can affect potency.</p>
+                    <a href="https://www.mrmed.in/health-library/health-care/safe-medicine-storage-at-home" target="_blank" class="read-more">Read Full Article →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="container">
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <h2>Get in Touch</h2>
+                <p>Have questions about your prescription or need help with a medicine search? Our pharmacists are here 24/7.</p>
+                <br>
+                <div class="info-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>+91 1800-PHARMA-QUEST</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>support@pharmaquest.in</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>123 Medical Park, Health City, TN</span>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <form id="contactForm" onsubmit="handleContact(event)">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="How can we help you?" rows="5" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Pharma Quest. Designed for College Project.</p>
+    </footer>
+
+    <script src="script.js"></script> 
+
+
+
+</body>
+</html>
